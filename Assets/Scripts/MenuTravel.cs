@@ -6,6 +6,11 @@ public class MenuTravel : MonoBehaviour
 {
     public Transform[] menusW;
     public AudioSource sf;
+
+    private void Awake()
+    {
+        Time.timeScale = 1.25f;
+    }
     public void makeMenu(int k)
     {
         foreach (var menu in menusW) { menu.gameObject.SetActive(false); }

@@ -13,11 +13,15 @@ public class GameManager : MonoBehaviour
     private int score;
     private int record;
 
-    private float timeElapsed;
+    [Header("Timer")]
+    public float startTime = 8f;
+    private float timeLeft;
+    private bool timerRunning;
+
     public AudioSource au;
+    public LoseManager meneGameOver;
     void Awake()
     {
-        // Singleton
         if (Instance == null)
             Instance = this;
         else
@@ -27,12 +31,20 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         record = PlayerPrefs.GetInt("Record", 0);
+        ResetTimer();
         UpdateUI();
     }
 
+
+    private void OnEnable()
+    {
+        ResetTimer();
+       
+    }
     void Update()
     {
-        UpdateTimer();
+        if (timerRunning)
+            UpdateTimer();
     }
 
     // --------------------
@@ -49,8 +61,10 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Record", record);
             PlayerPrefs.Save();
         }
+
         au.Play();
         UpdateUI();
+        ResetTimer();
     }
 
     public void ResetScore()
@@ -65,17 +79,30 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        timeElapsed += Time.deltaTime;
+        timeLeft -= Time.deltaTime;
 
-        int seconds = Mathf.FloorToInt(timeElapsed);
+        if (timeLeft <= 0f)
+        {
+            timeLeft = 0f;
+            timerRunning = false;
+            OnTimerEnd();
+        }
 
-        timerText.text = seconds.ToString();
+        timerText.text = Mathf.CeilToInt(timeLeft).ToString();
     }
-
 
     public void ResetTimer()
     {
-        timeElapsed = 0f;
+        timeLeft = startTime;
+        timerRunning = true;
+        timerText.text = Mathf.CeilToInt(timeLeft).ToString();
+    }
+
+    void OnTimerEnd()
+    {
+        meneGameOver.makeMenu(1);
+        score = 0;
+        UpdateUI();
     }
 
     // --------------------
