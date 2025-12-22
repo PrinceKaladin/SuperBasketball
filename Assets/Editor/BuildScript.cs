@@ -25,9 +25,9 @@ public class BuildScript
         // ��������� Android Signing ����� ���������� ���������
         // ========================
         string keystoreBase64 = Environment.GetEnvironmentVariable("CM_KEYSTORE_BASE64");
-        string keystorePass = Environment.GetEnvironmentVariable("CM_KEYSTORE_PASSWORD");
-        string keyAlias = Environment.GetEnvironmentVariable("CM_KEY_ALIAS");
-        string keyPass = Environment.GetEnvironmentVariable("CM_KEY_PASSWORD");
+        string keystorePass = "sportgame"
+        string keyAlias = "Alias01";
+        string keyPass = "sportgame"
 
         string tempKeystorePath = null;
 
