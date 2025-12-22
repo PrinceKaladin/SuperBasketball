@@ -1,6 +1,6 @@
 workflows:
   unity-build:
-    name: Unity Build
+    name: Unity Build - SuperBasketball
     instance_type: mac_mini_m2
     max_build_duration: 120
     environment:
@@ -8,7 +8,7 @@ workflows:
       vars:
         BUILD_PLATFORM: android
       groups:
-        - unity_credentials 
+        - unity_credentials  
     scripts:
       - name: Activate Unity license
         script: |
@@ -20,7 +20,15 @@ workflows:
             -username $UNITY_EMAIL \
             -password $UNITY_PASSWORD
 
-
+      - name: Prepare Android keystore
+        script: |
+          echo "Decoding Android keystore..."
+          echo $CM_KEYSTORE_BASE64 | base64 --decode > SuperBasketball.keystore
+          export ANDROID_KEYSTORE_PATH=SuperBasketball.keystore
+          export ANDROID_KEYSTORE_PASSWORD=$CM_KEYSTORE_PASSWORD
+          export ANDROID_KEY_ALIAS=$CM_KEY_ALIAS
+          export ANDROID_KEY_PASSWORD=$CM_KEY_PASSWORD
+          echo "Keystore saved at $ANDROID_KEYSTORE_PATH"
 
       - name: Build the project
         script: |
@@ -31,10 +39,14 @@ workflows:
             -projectPath . \
             -executeMethod BuildScript.PerformBuild \
             -nographics
+      - name: Return (deactivate) Unity license
+        script: |
+          echo "Returning Unity license..."
+          "$UNITY_HOME/Contents/MacOS/Unity" \
+          -batchmode -quit -returnLicense || true
 
     artifacts:
-      - IceFishing.aab
-      - IceFishing.apk
+      - SuperBasketball.aab
+      - SuperBasketball.apk
       - unity_build.log
       - unity_license.log
-      - unity_license_return.log
