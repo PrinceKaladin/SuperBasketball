@@ -12,7 +12,7 @@ public class BuildScript
         // ������ ����
         // ========================
         string[] scenes = {
-            "Assets/Scenes/Basket.unity",
+            "Assets/Scenes/Basket.unity"
         };
 
         // ========================
