@@ -12,7 +12,7 @@ public class BuildScript
         // Список сцен
         // ========================
         string[] scenes = {
-        "Assets/Scenes/Game.unity",
+        "Assets/Scenes/Basket.unity",
         };
 
         // ========================
