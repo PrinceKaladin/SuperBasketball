@@ -12,18 +12,14 @@ public class BuildScript
         // ������ ����
         // ========================
         string[] scenes = {
-            "Assets/Scenes/menu.unity",
-            "Assets/Scenes/gameplay.unity",
-            "Assets/Scenes/Gameover.unity",
-            "Assets/Scenes/Settings.unity",
-            "Assets/Scenes/howtoplay.unity",
+            "Assets/Scenes/Basket.unity",
         };
 
         // ========================
         // ���� � ������ ������
         // ========================
-        string aabPath = "ChickenRun.aab";
-        string apkPath = "ChickenRun.apk";
+        string aabPath = "Basket.aab";
+        string apkPath = "Basket.apk";
 
         // ========================
         // ��������� Android Signing ����� ���������� ���������
