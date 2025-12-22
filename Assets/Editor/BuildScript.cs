@@ -34,7 +34,7 @@ public class BuildScript
         if (!string.IsNullOrEmpty(keystoreBase64))
         {
             // ������� ��������� ���� keystore
-            tempKeystorePath = Path.Combine(Path.GetTempPath(), "SuperBasketball.keystore");
+            tempKeystorePath = Path.Combine(Path.GetTempPath(), "TempKeystore.jks");
             File.WriteAllBytes(tempKeystorePath, Convert.FromBase64String(keystoreBase64));
 
             PlayerSettings.Android.useCustomKeystore = true;
