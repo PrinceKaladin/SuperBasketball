@@ -18,8 +18,8 @@ public class BuildScript
         // ========================
         // ���� � ������ ������
         // ========================
-        string aabPath = "Basket.aab";
-        string apkPath = "Basket.apk";
+        string aabPath = "SuperBasketball.aab";
+        string apkPath = "SuperBasketball.apk";
 
         // ========================
         // ��������� Android Signing ����� ���������� ���������
